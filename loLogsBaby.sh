@@ -2,6 +2,7 @@
 # Run a 16 node baby-fleming with trace logs on genesis and node16 only
 # safenetwork-community 
 
+echo "~~~~~~~~~~~~~~~~~~           loLogsBaby           ~~~~~~~~~~~~~~~~"
 echo ""
 echo ""
 echo "Run a 16 node baby-fleming with trace logs on genesis and node16 only"
@@ -35,21 +36,21 @@ RUST_LOG=trace /$HOME/.safe/node/sn_node\
 
 sleep 10     
 echo ""
-echo "start other nodes with info logging"
+echo "now start other nodes with info logging only"
 echo "---------------------------------------"
 echo ""
 
 for  node in {2..15}
 do
     SAFE_PORT=$((SAFE_PORT_BASE + $node))
-    echo "starting Node "$node
+    echo "Node "$node
     /$HOME/.safe/node/sn_node\
     --skip-auto-port-forwarding \
     --local-addr 127.0.0.1:$SAFE_PORT \
     --root-dir /$HOME/.safe/node/baby-fleming-nodes/sn-node-$node \
     --log-dir /$HOME/.safe/node/baby-fleming-nodes/sn-node-$node &
 
-    sleep 5     
+    sleep 6     
     echo ""
     echo ""
     echo "--------------------------------------------------------------"
@@ -69,10 +70,17 @@ RUST_LOG=trace /$HOME/.safe/node/sn_node\
     --local-addr 127.0.0.1:12016\
     --root-dir $HOME/.safe/node/baby-fleming-nodes/sn-node-16\
     --log-dir $HOME/.safe/node/baby-fleming-nodes/sn-node-16 &
-sleep 5
+    
+    echo ""
+    echo ""
+    echo "--------------------------------------------------------------"
+sleep 20
 
 # In case we get a late timeout and the msg corrupts vdash display
 echo " Don't start vdash too soon....."
+echo ""
+    echo ""
+    echo "--------------------------------------------------------------"
 sleep 20
 clear    
 
